@@ -1,0 +1,282 @@
+<h2 style= "text-align: center; padding: 40px 0;"> Games:</h2>
+<div class="container-fluid">
+    <div class = "row">
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href= "/jump"> <img class="card-img-top" src="imgs/squarejump.png" alt="Square Jump"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Square Jump
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard regular-shadow">
+                <a href = "/colorwayz"> <img class="card-img-top" src="imgs/colorwayz.png" alt="Color Wayz"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Color Wayz
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href = "/jimbo"> <img class="card-img-top" src="imgs/jimbocrossing.png" alt="Jimbo Crossing"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Jimbo Crossing
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href = "/fillitin"> <img class="card-img-top" src="imgs/fillItIn.png" alt="Fill It In"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Fill It In
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href = "/snake"> <img class="card-img-top" src="imgs/snake.png" alt="Snake"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Snake Game
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href = "/rocket"> <img class="card-img-top" src="imgs/rocketdodger.png" alt="Rocket Dodger"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Rocket Dodger
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-md-4 d-flex justify-content-center text-center">
+            <div class="card gameCard">
+                <a href = "/breakout"> <img class="card-img-top" src="imgs/breakout.png" alt="Breakout"> </a>
+                <div class = "card-body">
+                    <p class = "card-text">
+                        Breakout
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class = "row">
+        <div class = "col-md-12 text-center" style = "margin-bottom:20px; margin-top:20px;">
+            <h1>Game Records</h1>
+        </div>
+    </div>
+
+
+    <div class = "row">
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Square Jump
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscoreSquare['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscoreSquare['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Jimbo Crossing
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscoreJimbo['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscoreJimbo['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Snake
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscoreSnake['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscoreSnake['username'] %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Fill It In
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score:
+                        <%if @highscoreFill %>
+                            <%= @highscoreFill['score'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                    <li class="list-group-item"> Earned by:
+                        <%if @highscoreFill %>
+                            <%= @highscoreFill['username'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Rocket Dodger
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score:
+                        <%if @highscoreRocket %>
+                            <%= @highscoreRocket['score'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                    <li class="list-group-item"> Earned by:
+                        <%if @highscoreRocket %>
+                            <%= @highscoreRocket['username'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    Breakout
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score:
+                        <%if @highscoreBreakout %>
+                            <%= @highscoreBreakout['score'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                    <li class="list-group-item"> Earned by:
+                        <%if @highscoreBreakout %>
+                            <%= @highscoreBreakout['username'] %>
+                        <% else %>
+                            N/A
+                        <% end %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-12 text-center gameTitle"
+            <h2>Color Wayz</h2>
+        </div>
+    </div>
+
+    <div class = "row">
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    14 X 14
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore14Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore14Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    22 X 22
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore22Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore22Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    30 X 30
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore30Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore30Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class = "row">
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    38 X 38
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore38Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore38Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    46 X 46
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore46Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore46Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+        <div class = "col-md-4 d-flex justify-content-center text-center">
+            <div class="card scoreCard">
+                <div class="card-header">
+                    54 X 54
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> Score: <%= @highscore54Color['score'] %></li>
+                    <li class="list-group-item"> Earned by: <%= @highscore54Color['username'] %></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>

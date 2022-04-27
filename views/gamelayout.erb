@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "uff-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="p5js/libraries/p5.min.js"></script>
+        <script type="text/javascript" src="p5js/libraries/p5.sound.min.js"></script>
+        <script type="text/javascript" src="p5js/libraries/hammer.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="Styles/stylesheet.css">
+        <title>Games For Food</title>
+        <script data-ad-client="ca-pub-4333470583446065" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+
+
+
+    <body>
+
+        <div class="header">
+            <h2>Games For Food</h2>
+            <p>Helping the food insecure, one trophy at a time</p>
+        </div>
+
+        <div id="navbar">
+
+            <a class="active" href="/">Home</a>
+            <a href="/about">About</a>
+            <% if @current_user.blank? %>
+                <a <%= if active_page("login") then  'class="active"'  end %> href="/login">Login</a>
+            <% else %>
+                <a href="/logout">Logout</a>
+                <a <%= if active_page("profile") then  'class="active"'  end %> style="color:white;font-size:16px; float:right;" href="/profile"><%= "Logged in as: #{@current_user.username}"%> </a>
+            <% end %>
+        </div>
+
+
+        <%=yield%>
+
+        </div>
+
+        <script>
+         window.onscroll = function() {myFunction()};
+
+         var navbar = document.getElementById("navbar");
+         var sticky = navbar.offsetTop;
+
+         function myFunction() {
+             if (window.pageYOffset >= sticky) {
+                 navbar.classList.add("sticky")
+             } else {
+                 navbar.classList.remove("sticky");
+             }
+         }
+        </script>
+
+
+    </body>
+</html>

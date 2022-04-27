@@ -1,0 +1,172 @@
+<h3 style = "text-align: center; color:; padding: 20px 0px"> Login/Sign-up </h3>
+<div class="container-fluid">
+    <%if !session[:err].nil? %>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%="#{session[:err]}" %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <div class = "row justify-content-center">
+        <div class = "col-md-4">
+            <!-- LOGIN -->
+            <button type="button" class="button buttonlogin btn-block" data-toggle="modal" data-target="#loginModal">
+                Login
+            </button>
+            <div id="loginModal" class="modal fade" tabIndex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="loginModalTitle">Login</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="loginForm" method="POST" action="/login_process">
+                                <div class="form-group">
+                                    <label for="uname"><b>Email</b></label>
+                                    <input type="text" placeholder="Enter Email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="psw"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="psw" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <button type="submit" form="loginForm" class="buttonlogin btn-block">Login</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="cancelbtn btn-block" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <!-- SIGN UP -->
+            <button type="button" class="button buttonlogin btn-block" data-toggle="modal" data-target="#signupModal">
+                Sign Up
+            </button>
+            <div id="signupModal" class="modal fade" tabIndex="-1" role="dialog" aria-labelledby="signupModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form id="signupForm" method="POST" action="/signup" onsubmit="return CheckForm(this);">
+                                <p style = "font-size: 18px;">Please fill in this form to create an account. Passwords must include at least 6 characters.</p>
+                                <div class="form-group">
+                                    <hr>
+                                    <label for="uname"><b>E-mail</b></label>
+                                    <input type="text" placeholder="Enter Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email must be valid, e.g. username@example.com">
+                                    <div id="emailErr02" class="alert alert-danger alert-dismissible fade show" style="display: none">
+                                        <button type="button" class="close" onClick="$('.alert').hide()"  aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="psw"><b>Password</b></label>
+                                    <input type="password" placeholder="Enter Password" name="pwd" >
+                                    <div id="passErr02" class="alert alert-danger alert-dismissible fade show" style="display: none">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                                    <input type="password" placeholder="Repeat Password" name="pwdrepeat">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6">
+                                        <button type="submit" form="signupForm" class="buttonlogin btn-block">Sign Up</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="cancelbtn btn-block" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+         //handle bad input from users
+         function CheckForm(form)
+         {
+             console.log("CHECKING");
+             if(form.email.value == "") {
+                 var inner = '<button type="button" class="close" onClick="$(\'#emailErr02\').hide()"  aria-label="Close"> <span aria-hidden="true">&times;</span> </button>';
+
+                 inner = "Error: Email must not be blank!" + inner;
+                 document.getElementById('emailErr02').innerHTML = inner;
+                 document.getElementById('emailErr02').style.display = "block";
+
+                 form.email.focus();
+                 return false;
+             }
+             if(!form.email.value.includes("@") || !form.email.value.includes(".")){
+                 var inner = '<button type="button" class="close" onClick="$(\'#emailErr02\').hide()"  aria-label="Close"> <span aria-hidden="true">&times;</span> </button>';
+
+                 inner = "Error: You must type in a valid email address!" + inner;
+
+                 document.getElementById('emailErr02').innerHTML = inner;
+                 document.getElementById('emailErr02').style.display = "block";
+
+                 form.email.focus();
+                 return false;
+             }
+             if(form.pwd.value != "" && form.pwd.value == form.pwdrepeat.value) {
+                 if(form.pwd.value.length < 6) {
+                     var inner = '<button type="button" class="close" onClick="$(\'#passErr02\').hide()"  aria-label="Close"> <span aria-hidden="true">&times;</span> </button>';
+
+                     inner = "Error: Password must contain at least six characters!" + inner;
+
+                     document.getElementById('passErr02').innerHTML = inner;
+                     document.getElementById('passErr02').style.display = "block";
+
+                     form.pwd.focus();
+                     return false;
+                 }
+                 if(form.pwd.value == form.email.value) {
+                     var inner = '<button type="button" class="close" onClick="$(\'#passErr02\').hide()"  aria-label="Close"> <span aria-hidden="true">&times;</span> </button>';
+
+                     inner = "Error: Password must be different from email!" + inner;
+
+                     document.getElementById('passErr02').innerHTML = inner;
+                     document.getElementById('passErr02').style.display = "block";
+
+                     form.pwd.focus();
+                     return false;
+                 }
+             } else {
+                 var inner = '<button type="button" class="close" onClick="$(\'#passErr02\').hide()"  aria-label="Close"> <span aria-hidden="true">&times;</span> </button>';
+
+                 inner = "Passwords must match and they must not be blank!" + inner;
+
+                 document.getElementById('passErr02').innerHTML = inner;
+                 document.getElementById('passErr02').style.display = "block";
+
+                 form.pwd.focus();
+                 return  false;
+             }
+
+             return true;
+         }
+        </script>
+    </div>
+</div>
