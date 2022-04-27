@@ -1,0 +1,104 @@
+#app.rb
+
+require 'sinatra'
+require 'sinatra/activerecord'
+require './models.rb'
+require 'date'
+
+require 'bcrypt'
+
+require_relative 'helpers/helpers.rb'
+
+set :database, {adapter: "mysql2", database:"gamesforfood2020", username:"gffdb", password:"#20FreeHinkMessCutSulk20$"}
+
+def current_user
+  puts session[:GffUser]
+
+  if session[:GffUser]
+    if GffUser.find(session[:GffUser]).blank?
+      redirect "/"
+    else
+      @current_user = GffUser.find(session[:GffUser])
+    end
+    puts "USER FOUND" + session[:GffUser].to_s
+  else
+    puts "NOT LOGGED IN"
+  end
+end
+
+
+class GamesForFoodApp < Sinatra::Base
+
+  use Rack::Session::Cookie, :key => 'rack.session', :path => '/', :secret => 'jakesucks'
+  use Rack::Session::Pool, :expire_after => 2592000
+
+  get '/' do
+    current_user
+    erb :index
+  end
+
+  get '/about' do
+    current_user
+    erb :about
+  end
+
+  get '/login' do
+    erb :login
+  end
+    
+  get '/colorwayz' do
+    current_user
+    erb :colorwayz, :layout => :gamelayout
+  end
+
+  get '/jump' do
+    current_user
+    erb :jump, :layout => :gamelayout
+  end
+
+  get '/jimbo' do
+    current_user
+    erb :jimbo, :layout => :gamelayout
+  end
+
+  get '/snake' do
+    current_user
+    erb :snake, :layout => :gamelayout
+  end
+
+  get '/fillitin' do
+    current_user
+    erb :fillitin, :layout => :gamelayout
+  end
+
+  get '/logout' do
+    puts  "LOGGED OUT"
+    session.clear
+    redirect "/"
+  end
+
+
+  post '/signup' do
+    time = DateTime.now
+    hashed_pwd = BCrypt::Password.create(params[:pwd])
+    GffUser.create(username: params[:email], password: hashed_pwd.to_s , create_at: time)
+    redirect "/"
+  end
+
+  post '/login_process' do
+    @user = GffUser.find_by(username:  params[:email])
+    if !@user.blank?
+      puts "FOUND USER"
+      hashed_check = BCrypt::Password.new(@user.password)
+      if hashed_check == params[:psw]
+        puts "PASSWORD MATCH"
+        session[:GffUser] = @user.id
+      else
+        @err = "Username/Password did not match!"
+        redirect "/login"
+      end
+      puts "SESSION: " + session[:GffUser].to_s
+    end
+    redirect "/"
+  end
+end
