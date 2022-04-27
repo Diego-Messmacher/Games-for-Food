@@ -1,0 +1,1 @@
+{"users"=>16, "celebs"=>1, "others"=>51, "help"=>45, "totService"=>29, "commService"=>19, "comm1"=>3, "comm75"=>2, "comm50"=>0, "comm25"=>1, "comml25"=>10, "comm0"=>1, "forHours"=>7, "forGood"=>9, "onlyPosted"=>0, "totIssues"=>10, "postedHalf"=>0, "onlyPostedAll"=>16, "jBOT"=>13, "postBOT"=>0, "jStraw"=>14, "postStraw"=>2, "moreStraw"=>0}
